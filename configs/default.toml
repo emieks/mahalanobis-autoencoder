@@ -1,0 +1,37 @@
+[paths]
+raw_data = "data/data.csv"
+data_dir = "data"
+model_dir = "models"
+results_dir = "results"
+
+[data]
+time_column = "Time"
+sensors = ["Vibration Radial", "Vibration Axial", "Humidity", "Temperature", "Shaft speed"]
+train_fraction = 0.70
+val_fraction = 0.15
+
+[model]
+hidden_dims = [32, 16, 8, 4]
+dropout = 0.2
+
+[training]
+epochs = 30
+batch_size = 128
+learning_rate = 1e-3
+early_stopping_patience = 5
+lr_patience = 1
+lr_factor = 0.1
+
+[injection]
+seed = 42
+anomaly_fraction = 0.05
+min_length = 30
+max_length = 300
+noise = 0.05
+magnitudes = [1, 2, 3, 4, 5]
+coupled = ["Vibration Radial", "Vibration Axial", "Shaft speed"]
+
+[evaluation]
+thresholds = [0.5, 1.5, 2.5, 3.5, 4.5]
+baseline_sigma = 3.0
+chi2_alpha = 0.05
